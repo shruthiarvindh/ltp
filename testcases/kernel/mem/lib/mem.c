@@ -846,7 +846,7 @@ int path_exist(const char *path, ...)
 	return access(pathbuf, F_OK) == 0;
 }
 
-void set_sys_tune(char *sys_file, long tune, int check)
+long set_sys_tune(char *sys_file, long tune, int check)
 {
 	long val;
 	char path[BUFSIZ];
@@ -862,6 +862,7 @@ void set_sys_tune(char *sys_file, long tune, int check)
 			tst_brk(TBROK, "%s = %ld, but expect %ld",
 				 sys_file, val, tune);
 	}
+	return val;
 }
 
 long get_sys_tune(char *sys_file)
