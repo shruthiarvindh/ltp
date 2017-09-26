@@ -57,11 +57,6 @@ static void setup(void)
 	stack = SAFE_MALLOC(STACK_SIZE);
 }
 
-static void cleanup(void)
-{
-	free(stack);
-}
-
 static int do_child(void *arg)
 {
 	pid2 = getpid();
@@ -97,7 +92,6 @@ static void verify_kcmp(unsigned int n)
 static struct tst_test test = {
 	.tcnt = ARRAY_SIZE(tcases),
 	.setup = setup,
-	.cleanup = cleanup,
 	.forks_child = 1,
 	.test = verify_kcmp,
 	.min_kver = "3.5.0"
